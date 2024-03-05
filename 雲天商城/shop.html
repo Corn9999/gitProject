@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玉米商城</title>
+    <base target="corn">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-position: center center;
+            
+            /*圖片檔*/
+            background-repeat: no-repeat;
+            /*不重複*/
+            background-size: cover;
+            /*覆蓋整個頁面*/
+        }
+
+        table {
+            height: 100%;
+            width: 100%;
+            border-collapse: collapse;
+            border: 4px solid black;
+        }
+
+        .a1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        td:first-child {
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="2">
+        <tr>
+            <td class="a1" colspan="2">
+                玉米商城
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <a href="animal.html#corn">動物天地</a><br>
+                <a href="cobo.html#corn">咖波商城</a><br>
+                <a href="morning.html#corn">早安殿堂</a>
+            </td>
+            <td>
+                <iframe name="corn" src="animal.html" width="1800px" height="900px" frameborder="0">
+
+                </iframe>
+            </td>
+
+
+        </tr>
+        
+
+    </table>
+
+</body>
+
+</html>
