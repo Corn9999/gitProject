@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分頁示例</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .page {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+</style>
+</head>
+<body>
+
+<div class="page" id="page1">
+    <h2>分頁 1</h2>
+    <p>這是第一個分頁的內容。</p>
+</div>
+
+<div class="page" id="page2">
+    <h2>分頁 2</h2>
+    <p>這是第二個分頁的內容。</p>
+</div>
+
+<div class="page" id="page3">
+    <h2>分頁 3</h2>
+    <p>這是第三個分頁的內容。</p>
+</div>
+
+<div>
+    <button class="pagination" data-page="page1" active>分頁 1</button>
+    <button class="pagination" data-page="page2">分頁 2</button>
+    <button class="pagination" data-page="page3">分頁 3</button>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.pagination').click(function(){
+            var pageId = $(this).data('page');
+            $('.page').removeClass('active');
+            $('#' + pageId).addClass('active');
+        });
+    });
+</script>
+
+</body>
+</html>

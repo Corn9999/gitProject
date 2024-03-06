@@ -9,6 +9,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- bootstrap -->
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <!-- bootstrap -->
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <!-- <script src="V3.js"></script> -->
+
+    <!-- jQuery -->
 </head>
 
 <body>
@@ -25,23 +33,31 @@
                 </ul>
             </div>
         </div>
-        <div class="row mt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">{{newdata}}</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </div>
+        <form class="page">
+            <div class="row mt-3">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#" id="previous">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="one.pagination"></a></li>
+                        <!-- <li class="page-item"><a class="page-link" href="#" id="two">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="three">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="four">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="five">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="six">6</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="seven">7</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="eig">8</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="nine">9</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="ten">10</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="ele">11</a></li>
+                        <li class="page-item"><a class="page-link" href="#" id="twf">12</a></li> -->
+                        <li class="page-item"><a class="page-link" href="#" id="next">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    <!-- bootstrap -->
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <!-- jQuery -->
+
     <script>
         $(function () {
 
@@ -49,7 +65,24 @@
                 type: "GET",
                 url: "https://cornweb.000webhostapp.com/web202403/2024/taipei_hoteldata-api.php",
                 dataType: "json",
+                data: {},
                 success: showdata,
+                //  function showdata(data) 
+                // {
+                // // 假設資料存儲在一個陣列中
+                // var data = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+                // // 創建一個空的 HTML 字符串
+                // var htmlContent = '';
+
+                // // 遍歷前10筆資料，將每一筆資料添加到 HTML 字符串中
+                // for ( i = 1; i < 10; i++) {
+                //     htmlContent += '<div>' + data[i] + '</div>';
+                // }
+
+                // // 將 HTML 字符串設置到具有 id 為 "one" 的元素中
+                // $('#one').html(htmlContent);
+                // },
                 error: function () {
                     alert("https://cornweb.000webhostapp.com/web202403/2024/taipei_hoteldata-api.php");
                 }
@@ -59,21 +92,170 @@
 
         function showdata(data) {
 
-            console.log(data);
-
+            // console.log(data);
             var newdata = [];
+            var page1 = "";
+
+
             //資料結構重組(重構)
             data.forEach(function (item, key) {
                 if (key % 10 == 0) {
                     newdata.push([]);
                 }
+                // for(i=0 ; i>=1 ; i++ ){
+                // while(newdata = 1 ){
+                // newdata ++;
+                // newdata % 10 ;
+                // var page0 = (newdata);
+                // var page1 = $("#one").append(page0);
+
+                // }
+                // console.log(page1)
+
 
                 var page = parseInt(key / 10);
                 newdata[page].push(item);
+                console.log(page)
+
+                $("")
+
+
+
             });
-            console.log(newdata);
+
+
+
+            // console.log(newdata[0]);
+
+
+
+            //    for(page123=newdata ; page123>=0 ;page123++){
+            //       for( newdata[page] = 0 ; newdata[page]>=0 ; newdata[page]++){
+            //          console.log(newdata[page])
+            //       }
+            //       break;
+            //    }
+            $('one.pagination').click(function () {
+                var pageId = $(this).data('page');
+                $('.page').removeClass('active');
+                $('#' + pageId).addClass('active');
+            });
+            $("#one").click(function () {
+                $("#hotel_list").empty();
+                newdata[0].forEach(function (item, key) {
+
+                    var show =
+                        $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+                    // $("#hotel_list").append(show);
+                    // console.log(newdata[11])
+
+                });
+
+            })
+            $("#two").click(function () {
+                $("#hotel_list").empty();
+                newdata[1].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#three").click(function () {
+                $("#hotel_list").empty();
+                newdata[2].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#four").click(function () {
+                $("#hotel_list").empty();
+                newdata[3].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#five").click(function () {
+                $("#hotel_list").empty();
+                newdata[4].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#six").click(function () {
+                $("#hotel_list").empty();
+                newdata[5].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#seven").click(function () {
+                $("#hotel_list").empty();
+                newdata[6].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#eig").click(function () {
+                $("#hotel_list").empty();
+                newdata[7].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#nine").click(function () {
+                $("#hotel_list").empty();
+                newdata[8].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#ten").click(function () {
+                $("#hotel_list").empty();
+                newdata[9].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#ele").click(function () {
+                $("#hotel_list").empty();
+                newdata[10].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+            $("#twf").click(function () {
+                $("#hotel_list").empty();
+                newdata[11].forEach(function (item, key) {
+
+                    var show = $("#hotel_list").append('<li class="list-group-item border border-2 border-danger shadow shadow-lg mt-3"><div class="h3">' + item.name + '</div><h5>住址' + item.display_addr + '</h5><h5>電話' + item.tel + '</h5><button class="btn btn-success w-100">MAp</button></li>');
+
+
+                })
+            })
+
+
         }
-        // 将 newdata 值插入到 HTML 中
+
 
 
     </script>

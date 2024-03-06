@@ -33,7 +33,7 @@
        // 連接資料庫,成功的話使用showdata這個function
 
         function showdata(data){
-            
+            $("#h_name").empty();
                console.log(data);
                data.forEach(function(item, key){
                  console.log(item.name);
